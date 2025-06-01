@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="chat-page">
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">💬</div>
+                    <h2>ChatApp</h2>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" id="theme-toggle" title="Toggle theme">
+                        <span class="icon">🌙</span>
+                    </button>
+                    <button class="icon-btn" id="settings-btn" title="Settings">
+                        <span class="icon">⚙️</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="user-info">
+                <img id="user-avatar" class="user-avatar" src="/placeholder.svg" alt="Your avatar">
+                <div class="user-details">
+                    <h3 id="user-name">Loading...</h3>
+                    <span class="user-status online">Online</span>
+                </div>
+            </div>
+
+            <div class="online-users">
+                <h4>Online Users <span id="online-count" class="count">0</span></h4>
+                <div id="online-list" class="users-list">
+                    <!-- Online users will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-chat">
+            <div class="chat-header">
+                <div class="chat-info">
+                    <h3>General Chat</h3>
+                    <span class="chat-status">
+                        <span id="online-indicator" class="status-dot online"></span>
+                        <span id="online-text">0 online</span>
+                    </span>
+                </div>
+                <button class="btn btn-secondary" id="logout-btn">Logout</button>
+            </div>
+
+            <div class="messages-container" id="messages">
+                <div class="loading-messages">
+                    <div class="loader"></div>
+                    <p>Loading messages...</p>
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span id="typing-text"></span>
+            </div>
+
+            <div class="message-input-container">
+                <div class="input-wrapper">
+                    <input type="text" 
+                           id="message-input" 
+                           class="message-input" 
+                           placeholder="Type your message..." 
+                           maxlength="500"
+                           autocomplete="off">
+                    <button id="send-btn" class="send-btn" disabled>
+                        <span class="icon">📤</span>
+                    </button>
+                </div>
+                <div class="input-footer">
+                    <span id="char-count" class="char-count">0/500</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Settings</h3>
+                <button class="close-btn" id="close-settings">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h4>Profile</h4>
+                    <div class="profile-settings">
+                        <img id="settings-avatar" class="settings-avatar" src="/placeholder.svg" alt="Avatar">
+                        <div class="avatar-controls">
+                            <input type="url" id="avatar-input" class="form-input" placeholder="Enter avatar URL">
+                            <button id="update-avatar" class="btn btn-primary">Update Avatar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4>Appearance</h4>
+                    <div class="theme-selector">
+                        <label class="radio-label">
+                            <input type="radio" name="theme" value="light" checked>
+                            <span class="radio-custom"></span>
+                            Light Theme
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="theme" value="dark">
+                            <span class="radio-custom"></span>
+                            Dark Theme
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification hidden"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>
